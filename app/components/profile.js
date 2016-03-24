@@ -2,15 +2,32 @@ import React, {Component} from 'react';
 import UserProfile from './Github/UserProfile';
 import Repos from './Github/Repos';
 import Notes from './Notes/Notes';
+import Rebase from 're-base';
 
+let base = Rebase.createClass('https://glaring-inferno-3951.firebaseio.com');
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       notes: ['note1', '2', '3'],
       bio: {name: 'Hello'},
       repos: ['repo1', '2', '3']
     };
+  }
+
+  componentDidMount() {
+    this.ref = base.syncState(
+      this.props.params.username,
+      {
+        context: this,
+        asArray: true,
+        state: 'notes'
+      }
+    )
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
   }
 
   render() {
@@ -20,10 +37,10 @@ class Profile extends Component {
           <UserProfile username={this.props.params.username} bio={this.state.bio}></UserProfile>
         </div>
         <div className="col-md-4">
-          <Repos repos={this.state.repos}></Repos>
+          <Repos username={this.props.params.username} repos={this.state.repos}></Repos>
         </div>
         <div className="col-md-4">
-          <Notes notes={this.state.notes}></Notes>
+          <Notes username={this.props.params.username} notes={this.state.notes}></Notes>
         </div>
       </div>
     )
