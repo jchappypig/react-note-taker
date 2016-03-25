@@ -30,6 +30,10 @@ class Profile extends Component {
     base.removeBinding(this.ref);
   }
 
+  handleAddNote(note) {
+    this.setState({notes: this.state.notes.concat([note])})
+  }
+
   render() {
     return (
       <div className="row">
@@ -40,7 +44,7 @@ class Profile extends Component {
           <Repos username={this.props.params.username} repos={this.state.repos}></Repos>
         </div>
         <div className="col-md-4">
-          <Notes username={this.props.params.username} notes={this.state.notes}></Notes>
+          <Notes username={this.props.params.username} notes={this.state.notes} addNote={this.handleAddNote.bind(this)}></Notes>
         </div>
       </div>
     )
