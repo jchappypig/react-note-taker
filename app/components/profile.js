@@ -3,15 +3,16 @@ import UserProfile from './Github/UserProfile';
 import Repos from './Github/Repos';
 import Notes from './Notes/Notes';
 import Rebase from 're-base';
+import helpers from '../utils/helpers';
 
 let base = Rebase.createClass('https://glaring-inferno-3951.firebaseio.com');
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: ['note1', '2', '3'],
-      bio: {name: 'Hello'},
-      repos: ['repo1', '2', '3']
+      notes: [],
+      bio: {},
+      repos: []
     };
   }
 
@@ -23,7 +24,15 @@ class Profile extends Component {
         asArray: true,
         state: 'notes'
       }
-    )
+    );
+
+    helpers.getGithubInfo(this.props.params.username)
+      .then(((data) => {
+        this.setState({
+          repos: data.repos,
+          bio: data.bio
+        })
+      }).bind(this));
   }
 
   componentWillUnmount() {

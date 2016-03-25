@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jchappypig/react-note-taker#readme",
   "dependencies": {
+    "axios": "^0.9.1",
     "history": "^2.0.1",
     "re-base": "^1.5.1",
     "react": "^0.14.7",
