@@ -12,4 +12,9 @@ class UserProfile extends Component {
   }
 }
 
+Repos.propTypes = {
+  username: React.propTypes.string.isRequired,
+  bio: React.PropTypes.object.isRequired
+};
+
 export default UserProfile;

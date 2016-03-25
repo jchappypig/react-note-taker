@@ -12,4 +12,9 @@ class Notes extends Component {
   }
 }
 
-export default Notes;
+Repos.propTypes = {
+  username: React.propTypes.string.isRequired,
+  notes: React.PropTypes.array.isRequired
+};
+
+export default Notes; 
