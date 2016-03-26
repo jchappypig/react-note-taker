@@ -16,7 +16,7 @@ class SearchGithub extends Component {
             <input type="text" className="form-control" ref='username'/>
           </div>
           <div className="form-group col-sm-5">
-            <button type="submit" className="btn btn-block btn-primary" onClick={this.handleSubmit.bind(this)}>
+            <button type="submit" className="btn btn-block btn-primary" >
               Searh Github
             </button>
           </div>

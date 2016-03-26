@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class UserProfile extends Component {
   render() {
-    console.log('Bio: ', this.props.bio);
     return (
       <div>
         <h3> User Profile </h3>
