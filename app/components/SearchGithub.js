@@ -5,7 +5,7 @@ class SearchGithub extends Component {
     let username = this.refs.username;
     let router = this.context.router;
 
-    router.push(`/profile/${username.value}`);
+    router.push(`profile/${username.value}`);
   }
 
   render() {
