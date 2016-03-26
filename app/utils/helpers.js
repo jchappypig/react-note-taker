@@ -9,16 +9,11 @@ function getUserInfo(username) {
 }
 
 
-const helper = {
-  getGithubInfo: (username) => {
-    return axios.all([getRepos(username), getUserInfo(username)])
-    .then((arr) => {
-      return {
+export default function getGithubInfo(username) {
+  return axios.all([getRepos(username), getUserInfo(username)])
+    .then((arr) => ({
         repos: arr[0].data,
         bio: arr[1].data
-      }
-    })
-  }
-};
-
-export default helper;
+      })
+    )
+}

@@ -3,7 +3,7 @@ import UserProfile from './Github/UserProfile';
 import Repos from './Github/Repos';
 import Notes from './Notes/Notes';
 import Rebase from 're-base';
-import helpers from '../utils/helpers';
+import getGithubInfo from '../utils/helpers';
 
 let base = Rebase.createClass('https://glaring-inferno-3951.firebaseio.com');
 class Profile extends Component {
@@ -17,8 +17,12 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    this.init(this.props.params.username);
+  }
+
+  init(username) {
     this.ref = base.syncState(
-      this.props.params.username,
+      username,
       {
         context: this,
         asArray: true,
@@ -26,7 +30,7 @@ class Profile extends Component {
       }
     );
 
-    helpers.getGithubInfo(this.props.params.username)
+    getGithubInfo(username)
       .then(((data) => {
         this.setState({
           repos: data.repos,
@@ -37,6 +41,10 @@ class Profile extends Component {
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.init(nextProps.params.username);
   }
 
   handleAddNote(note) {
