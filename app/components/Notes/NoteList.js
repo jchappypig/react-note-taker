@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 
 class NoteList extends Component {
   render() {
-    let notes = this.props.notes.map((note, index) => {
-      return (
-        <li key={index} className="list-group-item">
-          {note}
-        </li>)
-    });
+    const {notes} = this.props;
     return (
       <ul className="list-group">
-        {notes}
+        {
+          notes.map((note, index) => (
+            <li key={index} className="list-group-item">{note}</li>
+          ))
+        }
       </ul>
     )
   }
